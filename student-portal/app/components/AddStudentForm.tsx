@@ -1,3 +1,4 @@
+
 'use client';
 import { useState } from 'react';
 
@@ -35,14 +36,48 @@ export default function AddStudentForm({ onAdd }: { onAdd: (student: any) => voi
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 space-y-2 max-w-md">
-      <h3 className="text-xl font-semibold">Add New Student</h3>
-      {error && <p className="text-red-500">{error}</p>}
-      <input className="block border p-2 w-full" type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} />
-      <input className="block border p-2 w-full" type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
-      <input className="block border p-2 w-full" type="date" name="dob" value={formData.dob} onChange={handleChange} />
-      <input className="block border p-2 w-full" type="number" name="grade" placeholder="Grade (1-12)" value={formData.grade} onChange={handleChange} />
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Student</button>
+    <form onSubmit={handleSubmit} className="bg-gray-900 shadow-md rounded p-6 space-y-4 max-w-md mx-auto mt-8">
+      <h3 className="text-2xl font-semibold text-gray-300">Add New Student</h3>
+      {error && <p className="text-red-500 font-medium">{error}</p>}
+
+      <input
+        className="block border border-gray-300 rounded px-4 py-2 w-full focus:outline-none focus:ring focus:ring-gray-400 placeholder-white"
+        type="text"
+        name="firstName"
+        placeholder="First Name"
+        value={formData.firstName}
+        onChange={handleChange}
+      />
+      <input
+        className="block border border-gray-300 rounded px-4 py-2 w-full focus:outline-none focus:ring focus:ring-gray-400 placeholder-white"
+        type="text"
+        name="lastName"
+        placeholder="Last Name"
+        value={formData.lastName}
+        onChange={handleChange}
+      />
+      <input
+        className="block border border-gray-300 rounded px-4 py-2 w-full focus:outline-none focus:ring focus:ring-gray-400 placeholder-white"
+        type="date"
+        name="dob"
+        value={formData.dob}
+        onChange={handleChange}
+      />
+      <input
+        className="block border border-gray-300 rounded px-4 py-2 w-full focus:outline-none focus:ring focus:ring-gray-400 placeholder-white"
+        type="number"
+        name="grade"
+        placeholder="Grade (1-12)"
+        value={formData.grade}
+        onChange={handleChange}
+      />
+
+      <button
+        type="submit"
+        className="bg-gray-700 text-white font-medium px-4 py-2 rounded hover:bg-gray-800 transition"
+      >
+        Add Student
+      </button>
     </form>
   );
 }

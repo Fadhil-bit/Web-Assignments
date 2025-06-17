@@ -1,9 +1,9 @@
+
 'use client';
 
 import { useState } from 'react';
 import StudentCard from './components/StudentCard';
 import AddStudentForm from './components/AddStudentForm';
-import studentsData from './data/students.json';
 
 /**
  * Name: Fadhil Bedgel
@@ -12,22 +12,36 @@ import studentsData from './data/students.json';
  * It lists students and includes a form to add new ones with full validation.
  */
 
-export default function HomePage() {
-  const [students, setStudents] = useState(studentsData);
+const defaultStudents = [
+  { firstName: 'Jane', lastName: 'Doe', dob: '2008-04-12', grade: 10 },
+  { firstName: 'John', lastName: 'Smith', dob: '2009-01-25', grade: 9 },
+  { firstName: 'Carl', lastName: 'Jobs', dob: '2013-02-22', grade: 6 },
+];
 
-  const handleAddStudent = (student: any) => {
-    setStudents([...students, { id: students.length + 1, ...student }]);
+export default function StudentPage() {
+  const [students, setStudents] = useState(defaultStudents);
+
+  const addStudent = (student: any) => {
+    setStudents(prev => [...prev, student]);
+  };
+
+  const removeStudent = (indexToRemove: number) => {
+    setStudents(prev => prev.filter((_, i) => i !== indexToRemove));
   };
 
   return (
-    <>
-      <h1 className="text-3xl font-bold mb-6">Student List</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {students.map((student) => (
-          <StudentCard key={student.id} student={student} />
+    <main className="min-h-screen bg-transparent p-6 text-white">
+      <AddStudentForm onAdd={addStudent} />
+
+      <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {students.map((student, idx) => (
+          <StudentCard
+            key={idx}
+            student={student}
+            onDelete={() => removeStudent(idx)}
+          />
         ))}
       </div>
-      <AddStudentForm onAdd={handleAddStudent} />
-    </>
+    </main>
   );
 }
